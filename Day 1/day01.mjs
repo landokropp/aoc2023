@@ -4,26 +4,32 @@ const kValues = readFileSync("day01_part1.txt", { encoding: "utf-8" })
     .replace(/\r/g, "")
     .trim()
     .split("\n");
-
+console.log(kValues)
 function part1() {
   // Die `map`-Methode wird auf das Array `kValues` angewendet.
   let sum = kValues
-      .map((line) => {
+      .map(function(line) {
         // Für jede Zeichenkette `line` wird ein neues Array `allNums` erstellt.
-        let allNums = [...line].map((c) => Number(c)).filter(Boolean)
-        console.log('Erstelle Arrays für 4 inputs:',allNums);
+        let allNums = [...line].map(function (c) {
+           return Number(c);
+        }).filter(Boolean)
+
+          console.log('Erstelle Arrays für 4 inputs:',allNums);
 
 
           // Die erste und letzte Zahl von `allNums` werden in separaten Variablen gespeichert.
         let firstNum = allNums[0];
         let lastNum = allNums.slice(-1);
 
+
         // Ein neuer Wert wird erstellt, der aus der ersten und letzten Zahl von `allNums` besteht.
         return parseInt( `${firstNum}${lastNum}`); // Zeichenkette in Zahl umwandeln
       })
 
       // Die Summe aller Elemente im Array berechnen
-      .reduce((previousValue, currentValue) => previousValue + currentValue, 0)
+      .reduce(function (result, item) {
+         return result + item
+      }, 0)
 
   console.log(sum)
 }
@@ -72,7 +78,9 @@ function part2() {
             return +`${all[0].val}${all.slice(-1)[0].val}`;
         })
         // Füge die erzeugten Zahlen aller Zeilen zusammen.
-        .reduce((a, b) => a + b, 0);
+        .reduce(function (result, item){
+            return result + item
+        },0);
 
     // Gib die Summe aller erzeugten Zahlen aus.
     console.log(sum);
